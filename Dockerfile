@@ -13,8 +13,9 @@ RUN curl -sS http://mirrors.sonic.net/apache/zookeeper/current/zookeeper-3.4.6.t
   && chown -R root:root /opt/zookeeper
 
 RUN groupadd -r zookeeper \
-  && useradd -c "Zookeeper" -d /var/lib/zookeeper -g zookeeper -m -r -s /sbin/nologin zookeeper \
-  && rm /var/lib/zookeeper/.bash*
+  && useradd -c "Zookeeper" -d /var/lib/zookeeper -g zookeeper -M -r -s /sbin/nologin zookeeper \
+  && mkdir /var/lib/zookeeper \
+  && chown -R zookeeper:zookeeper /var/lib/zookeeper
 
 EXPOSE 2181 2888 3888
 

@@ -2,6 +2,6 @@ tickTime=2000
 dataDir=/var/lib/zookeeper
 clientPort=2181
 initLimit=10
-syncLimit=2
+syncLimit=5
 {{range gets "/zookeeper/*"}}{{$data := json .Value}}
 server.{{$data.ID}}={{$data.IP}}:2888:3888{{end}}

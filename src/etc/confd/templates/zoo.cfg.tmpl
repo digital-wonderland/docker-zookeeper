@@ -3,5 +3,5 @@ dataDir=/var/lib/zookeeper
 clientPort=2181
 initLimit=5
 syncLimit=2
-{{range gets "/zookeeper/*"}}
-{{.Value}}{{end}}
+{{range gets "/zookeeper/*"}}{{$data := json .Value}}
+server.{{$data.ID}}={{$data.IP}}:2888:3888{{end}}

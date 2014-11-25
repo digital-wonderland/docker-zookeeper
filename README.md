@@ -8,7 +8,7 @@
 
 ## Usage:
 
-The container can be configured via environment variabless:
+The container can be configured via environment variables:
 
 | Environment Variable | Zookeeper Property | Default |
 | -------------------- | ------------------ | --------|

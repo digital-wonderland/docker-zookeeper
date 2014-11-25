@@ -8,8 +8,20 @@
 
 ## Usage:
 
-The container expects a ```HOST_IP``` environment variable to be set, which is used to generate a Zookeeper id (last part) and to retrieve cluster members from [etcd](https://coreos.com/using-coreos/etcd/) so your ```docker run``` line should be similar to
+The container can be configured via environment variabless:
 
-```
-$ docker run -e HOST_IP=172.17.8.101 --name zookeeper-1 --publish 2181:2181 --publish 2888:2888 --publish 3888:3888 digitalwonderland/zookeeper
-```
+| Environment Variable | Zookeeper Property | Default |
+| -------------------- | ------------------ | --------|
+| ```ZOOKEEPER_ID``` | N/A | ```1``` |
+| ```ZOOKEEPER_TICK_TIME``` | ```tickTime``` | ```2000``` |
+| ```ZOOKEEPER_INIT_LIMIT``` | ```initLimit``` | ```10``` |
+| ```ZOOKEEPER_SYNC_LIMIT``` | ```syncLimit``` | ```5``` |
+| ```ZOOKEEPER_CLIENT_CNXNS``` | ```maxClientCnxns``` | ```60``` |
+| ```ZOOKEEPER_AUTOPURGE_SNAP_RETAIN_COUNT``` | ```autopurge.snapRetainCount``` | ```3``` |
+| ```ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL``` | ```autopurge.purgeInterval``` | ```0``` |
+
+So, if you are happy with the default, just run the container to get Zookeeper in standalone mode.
+
+To run a cluster just set more ```ZOOKEEPER_SERVER_X``` environment variables (replace ```X``` with the respective id) set to the respective ip.
+
+**Note:** A more dynamic configuration is not possible with Zookeeper 3.4 which might change with v3.5.

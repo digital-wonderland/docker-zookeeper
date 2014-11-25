@@ -2,13 +2,15 @@
 
 FROM digitalwonderland/base:latest
 
+ENV ZOOKEEPER_VERSION 3.4.6
+
 ADD ./src /
 
 RUN chmod +x /usr/local/sbin/start.sh
 
 RUN yum install -y java-1.7.0-openjdk-headless tar && yum clean all
 
-RUN curl -sS http://mirrors.sonic.net/apache/zookeeper/current/zookeeper-3.4.6.tar.gz | tar -xzf - -C /opt \
+RUN curl -sS http://mirrors.sonic.net/apache/zookeeper/current/zookeeper-${ZOOKEEPER_VERSION}.tar.gz | tar -xzf - -C /opt \
   && mv /opt/zookeeper-* /opt/zookeeper \
   && chown -R root:root /opt/zookeeper
 

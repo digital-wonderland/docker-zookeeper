@@ -2,7 +2,7 @@
 
 FROM digitalwonderland/base:latest
 
-ENV ZOOKEEPER_VERSION 3.4.6
+ENV ZOOKEEPER_VERSION 3.4.9
 
 ADD ./src /
 

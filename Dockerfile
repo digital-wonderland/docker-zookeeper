@@ -5,6 +5,8 @@ FROM digitalwonderland/base:latest
 ARG ZOOKEEPER_VERSION=3.4.9
 ARG ZOOKEEPER_MIRROR=http://mirrors.sonic.net
 
+LABEL name="zookeeper" version=${ZOOKEEPER_VERSION}
+
 ADD ./src /
 
 RUN chmod +x /usr/local/sbin/start.sh

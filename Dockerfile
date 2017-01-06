@@ -1,6 +1,6 @@
 # Apache Zookeeper
 
-FROM digitalwonderland/base:latest
+FROM openjdk:8-jre-alpine
 
 ARG ZOOKEEPER_VERSION=3.4.9
 ARG ZOOKEEPER_MIRROR=http://mirrors.sonic.net
@@ -11,14 +11,15 @@ ADD ./src /
 
 RUN chmod +x /usr/local/sbin/start.sh
 
-RUN yum install -y java-1.7.0-openjdk-headless tar && yum clean all
+RUN apk add --no-cache wget bash
 
-RUN curl -sS ${ZOOKEEPER_MIRROR}/apache/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz | tar -xzf - -C /opt \
+RUN mkdir /opt \
+  && wget -q -O - ${ZOOKEEPER_MIRROR}/apache/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz | tar -xzf - -C /opt \
   && mv /opt/zookeeper-* /opt/zookeeper \
   && chown -R root:root /opt/zookeeper
 
-RUN groupadd -r zookeeper \
-  && useradd -c "Zookeeper" -d /var/lib/zookeeper -g zookeeper -M -r -s /sbin/nologin zookeeper \
+RUN addgroup -S zookeeper \
+  && adduser -h /var/lib/zookeeper -G zookeeper -S -H -s /sbin/nologin zookeeper \
   && mkdir /var/lib/zookeeper \
   && chown -R zookeeper:zookeeper /var/lib/zookeeper
 

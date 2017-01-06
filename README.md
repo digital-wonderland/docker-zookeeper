@@ -1,6 +1,6 @@
 ## About:
 
-[Docker](http://www.docker.com/) image based on [digitalwonderland/base](https://registry.hub.docker.com/u/digitalwonderland/base/)
+[Docker](http://www.docker.com/) image based on [openjdk:8-jre-alpine](https://github.com/docker-library/openjdk/blob/master/8-jre/alpine/Dockerfile)
 
 ## Additional Software:
 

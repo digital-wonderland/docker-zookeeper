@@ -40,14 +40,11 @@ do
   if [[ $VAR =~ ^ZOOKEEPER_SERVER_[0-9]+= ]]; then
     SERVER_ID=`echo "$VAR" | sed -r "s/ZOOKEEPER_SERVER_(.*)=.*/\1/"`
     SERVER_IP=`echo "$VAR" | sed 's/.*=//'`
-    if [ "${SERVER_ID}" = "${ZOOKEEPER_ID}" ]; then
-      echo "server.${SERVER_ID}=0.0.0.0:2888:3888" >> /opt/zookeeper/conf/zoo.cfg
-      echo "server.${SERVER_ID}=0.0.0.0:2888:3888"
-    else
-      echo "server.${SERVER_ID}=${SERVER_IP}:2888:3888" >> /opt/zookeeper/conf/zoo.cfg
-      echo "server.${SERVER_ID}=${SERVER_IP}:2888:3888"
-    fi
+
+    echo "server.${SERVER_ID}=${SERVER_IP}:2888:3888" >> /opt/zookeeper/conf/zoo.cfg
+    echo "server.${SERVER_ID}=${SERVER_IP}:2888:3888"
   fi
+
 done
 
 su zookeeper -s /bin/bash -c "/opt/zookeeper/bin/zkServer.sh start-foreground"
